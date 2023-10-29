@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
@@ -95,11 +95,14 @@ namespace ConsoleApp60
                 int b = 0;
                 int pixel = 0;
 
-                while (round <= 2047)
+                // Tvoříme čtverce. Hodnota 2047 je poslední kolo čtverce, který se vejde na plochu 4096*4096.
+
+                while (round <= 2047) // (2*round + 1) ** 2 = 4096 ** 2 > round = 2047,5 > 2047 celých kol.
                 {
-                    for (int i = -round; i <= round; i++)
+                    for (int i = -round; i <= round; i++) // Cyklus pro horní část čtverce.
                     {
-                        image[2047 + i, 2047 + round] = new Rgba32((byte)r, (byte)g, (byte)b);
+                        image[2047 + i, 2047 + round] = new Rgba32((byte)r, (byte)g, (byte)b); // středový pixel je 2047, jelikož 4095 // 2 = 2047, kde 4095 je maximální index pixelu.
+                        //  na konci zbude pouze horní část čtverce a pracvá část čtverce. jelikož nám vyšlo necelé číslo počet kol.
 
                         (int, int, int) RGBpixel1 = GetRGBpixel(r, g, b);
                         r = RGBpixel1.Item1;
@@ -107,9 +110,9 @@ namespace ConsoleApp60
                         b = RGBpixel1.Item3;
                         pixel++;
 
-                        if (round != 0)
+                        if (round != 0) // abychom nepřebarvili počáteční pixel.
                         {
-                            image[2047 + i, 2047 - round] = new Rgba32((byte)r, (byte)g, (byte)b);
+                            image[2047 + i, 2047 - round] = new Rgba32((byte)r, (byte)g, (byte)b); // pro dolní část čtverce
 
                             (int, int, int) RGBpixel2 = GetRGBpixel(r, g, b);
                             r = RGBpixel2.Item1;
@@ -119,18 +122,18 @@ namespace ConsoleApp60
                         }
 
                     }
-                    if (round != 0)
+                    if (round != 0) // abychom nepřebarvili počáteční pixel.
                     {
-                        for (int i = -round + 1; i <= round - 1; i++)
+                        for (int i = -round + 1; i <= round - 1; i++) // pro strany čtverce.
                         {
-                            image[2047 + round, 2047 + i] = new Rgba32((byte)r, (byte)g, (byte)b);
+                            image[2047 + round, 2047 + i] = new Rgba32((byte)r, (byte)g, (byte)b); // pro strany čtverce.
 
                             (int, int, int) RGBpixel1 = GetRGBpixel(r, g, b);
                             r = RGBpixel1.Item1;
                             g = RGBpixel1.Item2;
                             b = RGBpixel1.Item3;
 
-                            image[2047 - round, 2047 + i] = new Rgba32((byte)r, (byte)g, (byte)b);
+                            image[2047 - round, 2047 + i] = new Rgba32((byte)r, (byte)g, (byte)b); // pro strany čtverce.
 
                             (int, int, int) RGBpixel = GetRGBpixel(r, g, b);
                             r = RGBpixel.Item1;
@@ -142,7 +145,10 @@ namespace ConsoleApp60
 
                     round++;
                 }
-                for (int i = -round + 1; i <= round; i++)
+
+                // dokončíme paletu, kde chceme vybarvit dvě části
+
+                for (int i = -round + 1; i <= round; i++)  // první část. HORNÍ
                 {
                     image[2047 + i, 2047 + round] = new Rgba32((byte)r, (byte)g, (byte)b);
 
@@ -152,7 +158,7 @@ namespace ConsoleApp60
                     b = RGBpixel1.Item3;
                     pixel += 1;
                 }
-                for (int i = -round + 1; i <= round - 1; i++)
+                for (int i = -round + 1; i <= round - 1; i++) // druhá část. PRAVÁ
                 {
                     image[2047 + round, 2047 + i] = new Rgba32((byte)r, (byte)g, (byte)b);
 
@@ -162,6 +168,8 @@ namespace ConsoleApp60
                     b = RGBpixel.Item3;
                     pixel += 1;
                 }
+
+               // Console.WriteLine(pixel); 16777216 = 4096 ** 2. Máme všechny pixely.
             }
         }
         static void Main(string[] args)
@@ -174,9 +182,9 @@ namespace ConsoleApp60
             pictureRandom.GenerateRandomPicture();
             picturePattern.GeneratePatternPicture();
 
-            pictureTrivial.image.Save("1.png");
-            pictureRandom.image.Save("2.png");
-            picturePattern.image.Save("3.png");
+            pictureTrivial.image.Save("trivial1.png");
+            pictureRandom.image.Save("random2.png");
+            picturePattern.image.Save("pattern3.png");
         }
     }
 }
