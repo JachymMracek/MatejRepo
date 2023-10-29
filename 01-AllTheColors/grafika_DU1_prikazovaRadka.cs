@@ -209,7 +209,7 @@ namespace ConsoleApp60
                     return;
                 }
 
-                if (o.Width * o.Height == 4096*4096) 
+                if (o.Width * o.Height < 4096*4096) 
                 {
                     Console.WriteLine("malá obrázek");
                     return;
