@@ -21,12 +21,6 @@ namespace ConsoleApp60
 
             [Option('n', "name", Required = true, HelpText = "Jak chcete obrázek pojmenovat:")]
             public string FileName { get; set; }
-
-            [Option('w', "width", Required = true, HelpText = "Jakou šířku má mít obrázek: (doporučená hodnota je 4096)")]
-            public string Width { get; set; }
-
-            [Option('h', "height", Required = true, HelpText = "Jakou výšku má mít obrázek: (doporučená hodnota je 4096)")]
-            public string Height { get; set; }
         }
         public class Picture
         {
@@ -204,21 +198,9 @@ namespace ConsoleApp60
         {
             Parser.Default.ParseArguments<Options>(args).WithParsed<Options>(o =>
             {
-                if (o.Mode == null || o.FileName == null || o.Width == null || o.Height == null)
+                if (o.Mode == null || o.FileName == null)
                 {
                     Console.WriteLine("Napište všechny parametry");
-                    return;
-                }
-
-                if (!int.TryParse(o.Width, out int width) || !int.TryParse(o.Height, out int height))
-                {
-                    Console.WriteLine("Špatný vstup pro šířku a výšku.");
-                    return;
-                }
-
-                if (width * height < 4096 * 4096)
-                {
-                    Console.WriteLine("Malý obrázek.");
                     return;
                 }
 
@@ -230,19 +212,19 @@ namespace ConsoleApp60
 
                 if (o.Mode == "trivial")
                 {
-                    Picture pictureTrivial = new Picture(int.Parse(o.Width), int.Parse(o.Height));
+                    Picture pictureTrivial = new Picture(4096,4096);
                     pictureTrivial.GenerateTrivialPicture();
                     pictureTrivial.image.Save($"{o.FileName}.png");
                 }
                 else if (o.Mode == "random")
                 {
-                    Picture pictureRandom = new Picture(int.Parse(o.Width), int.Parse(o.Height));
+                    Picture pictureRandom = new Picture(4096,4096);
                     pictureRandom.GenerateRandomPicture();
                     pictureRandom.image.Save($"{o.FileName}.png");
                 }
                 else if (o.Mode == "pattern")
                 {
-                    Picture picturePattern = new Picture(int.Parse(o.Width), int.Parse(o.Height));
+                    Picture picturePattern = new Picture(4096,4096);
                     picturePattern.GeneratePatternPicture();
                     picturePattern.image.Save($"{o.FileName}.png");
                 }
