@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
@@ -8,6 +8,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using static System.Net.Mime.MediaTypeNames;
 using CommandLine;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ConsoleApp60
 {
@@ -22,17 +23,17 @@ namespace ConsoleApp60
             public string FileName { get; set; }
 
             [Option('w', "width", Required = true, HelpText = "Jakou šířku má mít obrázek: (doporučená hodnota je 4096)")]
-            public int Width { get; set; }
+            public string Width { get; set; }
 
             [Option('h', "height", Required = true, HelpText = "Jakou výšku má mít obrázek: (doporučená hodnota je 4096)")]
-            public int Height { get; set; }
+            public string Height { get; set; }
         }
         public class Picture
         {
             public int width;
             public int height;
             public Image<Rgba32> image;
-            public Picture(int widthInput,int heightInput)
+            public Picture(int widthInput, int heightInput)
             {
                 width = widthInput;
                 height = heightInput;
@@ -196,7 +197,7 @@ namespace ConsoleApp60
                     pixel += 1;
                 }
 
-               // Console.WriteLine(pixel); 16777216 = 4096 ** 2. Máme všechny pixely.
+                // Console.WriteLine(pixel); 16777216 = 4096 ** 2. Máme všechny pixely.
             }
         }
         static void Main(string[] args)
@@ -209,27 +210,39 @@ namespace ConsoleApp60
                     return;
                 }
 
-                if (o.Width * o.Height < 4096*4096) 
+                if (!int.TryParse(o.Width, out int width) || !int.TryParse(o.Height, out int height))
                 {
-                    Console.WriteLine("malý obrázek");
+                    Console.WriteLine("Špatný vstup pro šířku a výšku.");
+                    return;
+                }
+
+                if (width * height < 4096 * 4096)
+                {
+                    Console.WriteLine("Malý obrázek.");
+                    return;
+                }
+
+                if (o.Mode != "trivial" && o.Mode != "pattern" && o.Mode != "random") 
+                {
+                    Console.WriteLine("Špatný mode");
                     return;
                 }
 
                 if (o.Mode == "trivial")
                 {
-                    Picture pictureTrivial = new Picture(o.Width,o.Height);
+                    Picture pictureTrivial = new Picture(int.Parse(o.Width), int.Parse(o.Height));
                     pictureTrivial.GenerateTrivialPicture();
                     pictureTrivial.image.Save($"{o.FileName}.png");
                 }
                 else if (o.Mode == "random")
                 {
-                    Picture pictureRandom = new Picture(o.Width,o.Height);
+                    Picture pictureRandom = new Picture(int.Parse(o.Width), int.Parse(o.Height));
                     pictureRandom.GenerateRandomPicture();
                     pictureRandom.image.Save($"{o.FileName}.png");
                 }
                 else if (o.Mode == "pattern")
                 {
-                    Picture picturePattern = new Picture(o.Width,o.Height);
+                    Picture picturePattern = new Picture(int.Parse(o.Width), int.Parse(o.Height));
                     picturePattern.GeneratePatternPicture();
                     picturePattern.image.Save($"{o.FileName}.png");
                 }
