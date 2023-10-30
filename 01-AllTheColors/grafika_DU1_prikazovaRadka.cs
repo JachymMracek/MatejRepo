@@ -32,14 +32,6 @@ namespace ConsoleApp60
                 width = widthInput;
                 height = heightInput;
                 image = new Image<Rgba32>(Configuration.Default, width, height);
-
-                for (int y = 0; y < height; y++)
-                {
-                    for (int x = 0; x < width; x++)
-                    {
-                        image[x, y] = new Rgba32(0, 0, 0, 255);
-                    }
-                }
             }
             public void GenerateTrivialPicture()
             {
