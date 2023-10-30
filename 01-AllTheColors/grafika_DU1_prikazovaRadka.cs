@@ -48,8 +48,6 @@ namespace ConsoleApp60
                         }
                     }
                 }
-
-                Console.WriteLine(pixel);
             }
             public void GenerateRandomPicture()
             {
