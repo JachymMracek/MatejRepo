@@ -112,7 +112,7 @@ internal class Program
             sfc = new ScanLine(pixelAction);
             break;
           case -1:
-            sfc = new Hilbert(pixelAction);
+            sfc = new ScanLine(pixelAction);
             break;
 
           case 1:
@@ -159,7 +159,7 @@ internal class Program
         Console.WriteLine($"{entropy}");
         Console.WriteLine($"Image: {o.FileName}[{width}x{height}]");
 
-        if (o.Method == 0)
+        if (o.Method == 0 o.Method == -1)
         {
           Console.WriteLine($"Order: ScanLine");
         }
@@ -175,7 +175,7 @@ internal class Program
         {
           Console.WriteLine($"Order: Spirala");
         }
-        if (o.Method == 4 || o.Method == -1)
+        if (o.Method == 4)
         {
           Console.WriteLine($"Order: Hilbert");
         }
