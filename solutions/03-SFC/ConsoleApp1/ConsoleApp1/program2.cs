@@ -420,8 +420,8 @@ public class Scan2 : DefaultPixelOrder
   {
     Debug.Assert(Callback != null);
 
-    for (int y = 0; y < width; y++)
-      for (int x = 0; x < height; x++)
+    for (int x = 0; x < width; x++)
+      for (int y = 0; y < height; y++)
         Callback(x, y);
   }
 }
