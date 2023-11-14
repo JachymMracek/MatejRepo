@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "ConsoleApp1": {
-      "commandName": "Project",
-      "commandLineArgs": "-i C:\\Users\\Admin\\source\\repos\\ConsoleApp106\\ConsoleApp106\\bin\\Debug\\net7.0\\hilbertik.png -m 1"
-    }
-  }
-}

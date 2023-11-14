@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "03-SFC": {
+      "commandName": "Project",
+      "commandLineArgs": "-i C:\\Users\\Admin\\source\\repos\\ConsoleApp106\\ConsoleApp106\\bin\\Debug\\net7.0\\hilbertik.png -m 2 -p 1",
+      "workingDirectory": "C:\\Users\\Admin\\JachymMracek_Grafika\\solutions\\03-SFC"
+    }
+  }
+}
