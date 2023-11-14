@@ -159,7 +159,7 @@ internal class Program
         Console.WriteLine($"{entropy}");
         Console.WriteLine($"Image: {o.FileName}[{width}x{height}]");
 
-        if (o.Method == 0 o.Method == -1)
+        if (o.Method == 0 || o.Method == -1)
         {
           Console.WriteLine($"Order: ScanLine");
         }
