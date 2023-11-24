@@ -1,4 +1,4 @@
-﻿namespace _03_SFC;
+namespace _03_SFC;
 
 public interface IPredictor
 {
