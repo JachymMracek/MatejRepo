@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using CommandLine;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
 
@@ -130,6 +130,9 @@ internal class Program
           case 5:
             sfc = new Scan2(pixelAction);
             break;
+          case 6:
+            sfc = new A(pixelAction);
+            break;
 
           default:
             Console.WriteLine($"Invalid method {o.Method}.");
@@ -153,7 +156,6 @@ internal class Program
             }
           return;
         }
-
         // Compute and print the entropy.
         long entropy = entropyCalculator.Entropy();
         Console.WriteLine($"{entropy}");
@@ -182,6 +184,10 @@ internal class Program
         if (o.Method == 5)
         {
           Console.WriteLine($"Order: Scan2");
+        }
+        if (o.Method == 6)
+        {
+          Console.WriteLine($"Order: A");
         }
 
         Console.WriteLine(FormattableString.Invariant($"Average entropy: {entropy / (double)(width * height):f2} bits per pixel"));
