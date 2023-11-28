@@ -2,6 +2,7 @@
 using CommandLine;
 using static ConsoleApp5.Program;
 using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices;
 
 namespace ConsoleApp5
 {
@@ -1132,7 +1133,7 @@ namespace ConsoleApp5
         }
         if (int.Parse(o.Width) < 200 || int.Parse(o.Height) < 200)
         {
-          Console.WriteLine("You added few pixels");
+          Console.WriteLine("You added small side of picture");
         }
         if (o.Symmetry != 5 && o.Symmetry != 6)
         {
