@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using CommandLine;
 using SixLabors.ImageSharp.ColorSpaces.Conversion;
 
@@ -112,7 +112,7 @@ internal class Program
             sfc = new ScanLine(pixelAction);
             break;
           case -1:
-            sfc = new Hilbert(pixelAction);
+            sfc = new ScanLine(pixelAction);
             break;
 
           case 1:
@@ -129,6 +129,9 @@ internal class Program
             break;
           case 5:
             sfc = new Scan2(pixelAction);
+            break;
+          case 6:
+            sfc = new A(pixelAction);
             break;
 
           default:
@@ -153,13 +156,12 @@ internal class Program
             }
           return;
         }
-
         // Compute and print the entropy.
         long entropy = entropyCalculator.Entropy();
         Console.WriteLine($"{entropy}");
         Console.WriteLine($"Image: {o.FileName}[{width}x{height}]");
 
-        if (o.Method == 0)
+        if (o.Method == 0 || o.Method == -1)
         {
           Console.WriteLine($"Order: ScanLine");
         }
@@ -175,13 +177,17 @@ internal class Program
         {
           Console.WriteLine($"Order: Spirala");
         }
-        if (o.Method == 4 || o.Method == -1)
+        if (o.Method == 4)
         {
           Console.WriteLine($"Order: Hilbert");
         }
         if (o.Method == 5)
         {
           Console.WriteLine($"Order: Scan2");
+        }
+        if (o.Method == 6)
+        {
+          Console.WriteLine($"Order: A");
         }
 
         Console.WriteLine(FormattableString.Invariant($"Average entropy: {entropy / (double)(width * height):f2} bits per pixel"));

@@ -25,7 +25,7 @@ namespace ConsoleApp60
       [Option('n', "name", Required = true, HelpText = "Jak chcete obrázek pojmenovat:")]
       public string FileName { get; set; }
 
-      [Option('w', "name", Required = true, HelpText = "Jakou chcete šířku obrázku: (doporučeno 4096)")]
+      [Option('w', "width", Required = true, HelpText = "Jakou chcete šířku obrázku: (doporučeno 4096)")]
       public string Width { get; set; }
 
       [Option('h', "height", Required = true, HelpText = "Jakou chcete výšku obrázku: (doporučeno 4096)")]

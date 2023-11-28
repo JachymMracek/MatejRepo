@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
@@ -423,5 +424,145 @@ public class Scan2 : DefaultPixelOrder
     for (int x = 0; x < width; x++)
       for (int y = 0; y < height; y++)
         Callback(x, y);
+  }
+}
+
+public class A : DefaultPixelOrder
+{
+  public int width = 0;
+  public int height = 0;
+  public int x = 0;
+  public int y = 0;
+  HashSet<(int,int)> keys = new HashSet<(int,int)>();
+  public int yMin = 0;
+  public int xMax = 0;
+  public int xMin = 0;
+  public int count = 0;
+  public A (PixelAction callback) : base(callback)
+  {}
+  public override void Pass (int width, int height)
+  {
+    Debug.Assert(Callback != null);
+
+    this.width = width;
+    this.height = height;
+    this.x = 0;
+    this.y = height - 1;
+    this.yMin = 0;
+    this.xMax = width - 1;
+    this.xMin = 1;
+
+    Callback(0, height - 1);
+
+    MainA();
+  }
+  public void Up()
+  {
+    for (int i = y - 1; i >= yMin; i--)
+    {
+      keys.Add((x, i));
+      Callback(x,i);
+      count++;
+    }
+    y = yMin;
+    yMin += 1;
+  }
+  public void Right()
+  {
+    for (int i = x + 1; i <= xMax; i++)
+    {
+      keys.Add((i, y));
+      Callback(i, y);
+      count++;
+    }
+    x = xMax;
+    xMax -= 1;
+  }
+  public void Down()
+  {
+    for (int i = y + 1 ; i <= height - 1; i++)
+    {
+      keys.Add((x, i));
+      Callback(x, i);
+      count++;
+    }
+    y = height - 1;
+  }
+  public void Left()
+  {
+    for (int i = x - 1; i >= xMin; i--)
+    {
+      keys.Add((i, y));
+      Callback(i, y);
+      count++;
+    }
+    x = xMin;
+    xMin += 1;
+  }
+  public void MainA()
+  {
+    while (true)
+    {
+      if (keys.Contains((x, y - 1)))
+      {
+        break;
+      }
+      Up();
+
+      if (keys.Contains((x + 1, y)))
+      {
+        break;
+      }
+
+      Right();
+
+      if (keys.Contains((x, y + 1)))
+      {
+        break;
+      }
+
+      Down();
+
+      if (keys.Contains((x - 1, y)))
+      {
+        break;
+      }
+
+      Callback(x - 1, y);
+      keys.Add((x - 1, y));
+      xMax -= 1;
+      x = x - 1;
+
+      if (keys.Contains((x, y - 1)))
+      {
+        break;
+      }
+
+      Up();
+
+      if (keys.Contains((x - 1, y)))
+      {
+        break;
+      }
+
+      Left();
+
+      if (keys.Contains((x, y + 1)))
+      {
+        break;
+      }
+
+      Down();
+
+      if (keys.Contains((x + 1, y)))
+      {
+        break;
+      }
+
+      Callback(x + 1, y);
+      keys.Add((x + 1, y));
+      xMin += 1;
+      x = x + 1;
+    }
   }
 }
