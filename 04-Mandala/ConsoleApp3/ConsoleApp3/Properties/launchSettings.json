@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleApp3": {
+      "commandName": "Project",
+      "commandLineArgs": "-s 6 -c yes -e yes -w 50000 -h 500000 -n obrazek.png"
+    }
+  }
+}
