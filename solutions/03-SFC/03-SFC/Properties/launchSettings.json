@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "03-SFC": {
+      "commandName": "Project",
+      "commandLineArgs": "-i C:\\Users\\Admin\\JachymMracek_Grafika\\03-SFC\\dalle2023-10-12-22-58-42.jpg -m 4 -p 1"
+    }
+  }
+}
