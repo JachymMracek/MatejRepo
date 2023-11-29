@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "04-Mandala": {
-      "commandName": "Project",
-      "commandLineArgs": "-s 8 -c yes -e yes -d yes -w 4096 -h 4096\r\n-n cau",
-      "workingDirectory": "$(ProjectDir)"
-    }
-  }
-}
