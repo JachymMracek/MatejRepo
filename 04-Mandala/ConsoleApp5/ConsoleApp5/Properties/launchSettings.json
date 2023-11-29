@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "ConsoleApp5": {
-      "commandName": "Project",
-      "commandLineArgs": "-s 6 -c no -e no -d no -n obrazek.png  -h 1000\r\n-w 1250\r\n",
-      "workingDirectory": "$(ProjectDir)"
-    }
-  }
-}
