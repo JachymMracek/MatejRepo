@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection.Metadata.Ecma335;
@@ -576,7 +576,7 @@ internal class Program
                     particles.RemoveAt(i);
                 }
 
-                if (sim.particles.Count > 55000)
+                if (sim.particles.Count > 50000)
                 {
                     if (part.ramp)
                     {
@@ -596,7 +596,7 @@ internal class Program
 
                     continue;
                 }
-                if (sim.particles.Count < 55000)
+                if (sim.particles.Count < 50000)
                 {
                     if (part.ramp)
                     {
