@@ -2,7 +2,7 @@
   "profiles": {
     "08-Fireworks": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\Admin\\JachymMracek_Grafika\\solutions\\08-FireWorks"
+      "workingDirectory": "$(ProjectDir)"
     }
   }
 }
