@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "03-SFC": {
-      "commandName": "Project",
-      "commandLineArgs": "-i masa512g.png -m 0",
-      "workingDirectory": "$(ProjectDir)"
-    }
-  }
-}
