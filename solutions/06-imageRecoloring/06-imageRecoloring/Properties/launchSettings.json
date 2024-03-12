@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "06-imageRecoloring": {
-      "commandName": "Project",
-      "commandLineArgs": "-i C:\\Users\\Admin\\Downloads\\_02-disk.jpg -h 30\r\n-o obr -d yes"
-    }
-  }
-}
