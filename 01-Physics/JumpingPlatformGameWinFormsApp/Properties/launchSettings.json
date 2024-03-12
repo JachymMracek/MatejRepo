@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JumpingPlatformGameWinFormsApp": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Admin\\mracekj1\\01-Physics\\PhysicsApiTestConsoleApp\\bin\\Debug\\net8.0"
+    }
+  }
+}
